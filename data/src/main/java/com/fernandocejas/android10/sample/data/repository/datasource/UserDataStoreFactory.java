@@ -34,7 +34,7 @@ public class UserDataStoreFactory {
   private final UserCache userCache;
 
   @Inject
-  public UserDataStoreFactory(@NonNull Context context, @NonNull UserCache userCache) {
+  UserDataStoreFactory(@NonNull Context context, @NonNull UserCache userCache) {
     this.context = context.getApplicationContext();
     this.userCache = userCache;
   }
@@ -58,8 +58,8 @@ public class UserDataStoreFactory {
    * Create {@link UserDataStore} to retrieve data from the Cloud.
    */
   public UserDataStore createCloudDataStore() {
-    UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
-    RestApi restApi = new RestApiImpl(this.context, userEntityJsonMapper);
+    final UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
+    final RestApi restApi = new RestApiImpl(this.context, userEntityJsonMapper);
 
     return new CloudUserDataStore(restApi, this.userCache);
   }
